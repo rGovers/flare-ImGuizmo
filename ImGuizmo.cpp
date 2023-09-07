@@ -2395,7 +2395,10 @@ namespace IMGUIZMO_NAMESPACE
          rotationAxisLocalSpace.Normalize();
 
          matrix_t deltaRotation;
-         deltaRotation.RotationAxis(rotationAxisLocalSpace, gContext.mRotationAngle - gContext.mRotationAngleOrigin);
+         // Using a negative coordiante system so patch to get around that so the rotation is correct
+         // Could not see a config flag to change that in ImGuizmo so fork it is
+         // deltaRotation.RotationAxis(rotationAxisLocalSpace, gContext.mRotationAngle - gContext.mRotationAngleOrigin);
+         deltaRotation.RotationAxis(rotationAxisLocalSpace, gContext.mRotationAngleOrigin - gContext.mRotationAngle);
          if (gContext.mRotationAngle != gContext.mRotationAngleOrigin)
          {
             modified = true;
